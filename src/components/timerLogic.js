@@ -11,7 +11,7 @@ export default function TimerLogic() {
                     if (prevTime == 0) {
                         clearInterval(timeRunning.current);
                         timeRunning.current = null;
-                        return 0;
+                        return;
                     }
                     return prevTime - 1;
                 });

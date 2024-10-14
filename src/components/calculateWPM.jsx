@@ -1,34 +1,37 @@
 import '../App.css';
+import { useState, useEffect } from 'react';
 
 export default function CalculateWPM({inputWords, generatedWords, inputTime}) {
-    if (!inputWords || !generatedWords) {
-      console.log('in none');
-        return (
-          <div className="wpm">
-            <h1>WPM: 0</h1>
-          </div>
-        );
-    }
+  const [wpm, setWPM] = useState(0);
+  const [lastTime, setLastTime] = useState(0);
 
-    if (inputWords.length === 0 || generatedWords.length === 0) {
-      console.log('in none 2');
-        return (
-          <div className="wpm">
-            <h1>WPM: 0</h1>
-          </div>
-        );
-    }
+  useEffect(() => {
     const inputWordsArr = inputWords.split('');
     const generatedWordsArr = generatedWords.split('');
-    const correctWords = inputWordsArr.filter(
+    const correctChar = inputWordsArr.filter(
       (word, index) => word === generatedWordsArr[index]
     ).length;
-    const wpm = Math.round((correctWords / 5) / inputTime);
 
-    console.log('in main');
+    if (inputTime !== 0) {
+      setLastTime(inputTime);
+      setWPM(Math.round((correctChar/5) / (inputTime/60)))
+      // console.log(wpmCalc, inputTime)
+    } else {
+      setWPM(Math.round((correctChar/5) / (lastTime/60)))
+      // console.log(wpmCalcNOT, lastTime)
+    }
+    }, [inputWords, generatedWords, inputTime, lastTime]);
+
+    if (inputWords.length === 0 || generatedWords.length === 0) {
+        return (
+          <div className="wpm">
+            <h1>WPM: 0</h1>
+          </div>
+        );
+    }
     return (
       <div className="wpm">
-        <h1>WPM: {inputTime}</h1>
+        <h1>WPM: {wpm}</h1>
       </div>  
     );
 }
