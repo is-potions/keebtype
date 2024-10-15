@@ -41,12 +41,25 @@ export default function App() {
       }
   }  // const [isRunning, setIsRunning] = useState(false);
 
-  const handleTimeChange = (event) => {
-    setTime(event.target.value);
-}
+//   const handleTimeChange = (event) => {
+//     setTime(event.target.value);
+// }
   
   const handleTextChange = (event) => {
     setInputWords(event.target.value);
+    if (event.target.value.length === 1) {
+      timerStart(time);
+    }
+  }
+
+  const handleAddTime = () => {
+    setTime(time + 30);
+  }
+  const handleSubtTime = () => {
+    if (time === 0) {
+      return;
+    }
+    setTime(time - 30);
   }
 
   return (
@@ -54,8 +67,9 @@ export default function App() {
       <DisplayWords inputWords={inputWords} generatedWords={generatedWords}/>
       <input type="text" className="inputField" onChange={handleTextChange}/>
       <h1 className="time">Time: {time}</h1>
-      <input type="text" className="inputField" onChange={handleTimeChange}/>
-      <button onClick={() => timerStart(time)}>Start Timer</button>
+      {/* <input type="text" className="inputField" onChange={handleTimeChange}/> */}
+      <button onClick={() => handleAddTime()}>Add 30 secs</button>
+      <button onClick={() => handleSubtTime()}>Subtract 30 secs</button>
       <CalculateWPM inputWords={inputWords} generatedWords={generatedWords} inputTime={elapsedTime}/>
 
     </div>
