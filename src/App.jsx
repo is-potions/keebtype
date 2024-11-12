@@ -3,7 +3,6 @@
 import './App.css';
 import DisplayWords from './components/displayWords';
 import CalculateWPM from './components/calculateWPM';
-// import Timer from './components/timer';
 import { faker } from '@faker-js/faker';
 import { useState, useRef } from 'react';
 
@@ -47,26 +46,10 @@ export default function App() {
       }
   }
 
-//   const [isRunning, setIsRunning] = useState(false);
-
-//   const handleTimeChange = (event) => {
-//     setTime(event.target.value);
-// }
-
   const handleTextChange = (event) => {
     // console.log(inputWord);
     const inputValue = event.target.value;
     setInputWordsArr(inputValue);
-    // if (inputValue.endsWith(' ')) {
-    //   const newWord = inputValue.trim();
-    //   if (newWord) {
-    //     setInputWordsArr(inputWordsArr + ' ' + newWord);
-    //   }
-    //   setInputWord('');
-    //   event.target.value = '';
-    // } else {
-    //   setInputWord(inputValue);
-    // }
 
     if (inputWordsArr.length === 1) {
       timerStart(time);
