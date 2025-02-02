@@ -20,13 +20,6 @@ export default function CalculateWPM({inputWords, generatedWords, inputTime}) {
     
     }, [inputWords, generatedWords, inputTime]);
 
-    if (inputWords.length === 0 || generatedWords.length === 0) {
-        return (
-          <div className="wpm">
-            <h1>WPM: 0</h1>
-          </div>
-        );
-    }
     return (
       <div className="wpm">
         <h1>WPM: {wpm}</h1>

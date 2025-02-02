@@ -74,18 +74,22 @@ export default function App() {
   return (
     <>
       <div>
+        <div className='infoBox'>
+          <div className='timeContainer'>
+            <h1>Time: {time}</h1>
+          </div>
+          {wpmVisible && (
+            <CalculateWPM inputWords={inputWordsArr} generatedWords={generatedWordsArr} inputTime={elapsedTime}/>
+          )}
+        </div>
         <DisplayWords inputWords={inputWordsArr} generatedWords={generatedWordsArr}/>
         <input type="text" className="inputField" onChange={handleTextChange}/>
-        <h1 className="time">Time: {time}</h1>
         {timeRunning && 
           <>
             <button onClick={() => handleAddTime()}>Add 30 secs</button>
             <button onClick={() => handleSubtTime()}>Subtract 30 secs</button>
           </>
         } 
-        {wpmVisible && (
-          <CalculateWPM inputWords={inputWordsArr} generatedWords={generatedWordsArr} inputTime={elapsedTime}/>
-        )}
       </div>
     </>
   );
