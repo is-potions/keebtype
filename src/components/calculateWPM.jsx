@@ -3,25 +3,22 @@ import { useState, useEffect } from 'react';
 
 export default function CalculateWPM({inputWords, generatedWords, inputTime}) {
   const [wpm, setWPM] = useState(0);
-  const [lastTime, setLastTime] = useState(0);
-  console.log(inputWords, generatedWords);
 
   useEffect(() => {
     // splits strings into arrays to remove spaces in comparison
     const inputWordsArr = inputWords.trim().split(/\s+/);
     const generatedWordsArr = generatedWords.split(/\s+/);
+
+    // filters right words and calculates correct characters
     const correctChar = inputWordsArr.filter(
       (word, index) => word === generatedWordsArr[index]
     ).join('').length;
 
-    if (inputTime !== 0) {
-      setLastTime(inputTime);
-      setWPM(Math.round((correctChar/5) / (inputTime/60)))
-    } else {
-      setWPM(Math.round((correctChar/5) / (lastTime/60)))
-    }
+    if (inputTime > 0) {
+      setWPM(Math.round((correctChar/5) / (Math.max(inputTime,1)/60)))
+    } 
     
-    }, [inputWords, generatedWords, inputTime, lastTime]);
+    }, [inputWords, generatedWords, inputTime]);
 
     if (inputWords.length === 0 || generatedWords.length === 0) {
         return (
